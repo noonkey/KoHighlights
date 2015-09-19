@@ -1,0 +1,1 @@
+KoHighlights is a  utility for converting the Koreader's history files to simple text.
