@@ -53,6 +53,8 @@ class KoHighlightsMainFrame(gui.MainFrame):
         """ Gets the highlights from the KoReader History File.
         :type filename: str|unicode
         :param filename: path to file
+        :type display_results: bool
+        :param display_results: Display the found highlights or not
         """
         self.text_field.Clear()
         file_name_full = os.path.split(filename)[1]
