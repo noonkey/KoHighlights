@@ -139,10 +139,11 @@ class KoHighlightsMainFrame(gui.MainFrame):
             return
         dest_dialog.Destroy()
         current_path, _, files = os.walk(source_path).next()
-        frame.dropped_files = len(files)
         for name in files:
-            filename = os.path.join(current_path, name)
-            frame.drop.dropped_files_list.append(filename)
+            if os.path.splitext(name)[1] == '.lua':
+                filename = os.path.join(current_path, name)
+                frame.drop.dropped_files_list.append(filename)
+        frame.dropped_files = len(frame.drop.dropped_files_list)
         self.batch_dialog.on_batch(None, dest_path)
 
     def on_about(self, event):
