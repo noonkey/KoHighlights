@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*- 
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version Jun 17 2015)
-## http://www.wxformbuilder.org/
-##
-## PLEASE DO "NOT" EDIT THIS FILE!
+# Python code generated with wxFormBuilder (version Jun 17 2015)
+# http://www.wxformbuilder.org/
+#
+# PLEASE DO "NOT" EDIT THIS FILE!
 ###########################################################################
 
 import wx
@@ -13,7 +13,7 @@ import wx.html
 
 
 ###########################################################################
-## Class MainFrame
+# Class MainFrame
 ###########################################################################
 
 class MainFrame(wx.Frame):
@@ -96,7 +96,7 @@ class MainFrame(wx.Frame):
 
 
 ###########################################################################
-## Class BatchDialog
+# Class BatchDialog
 ###########################################################################
 
 class BatchDialog(wx.Dialog):
@@ -161,7 +161,7 @@ class BatchDialog(wx.Dialog):
 
 
 ###########################################################################
-## Class BatchResults
+# Class BatchResults
 ###########################################################################
 
 class BatchResults(wx.Dialog):
@@ -184,8 +184,8 @@ class BatchResults(wx.Dialog):
         self.results_text = wx.StaticText(self, wx.ID_ANY,
                                           u"Dropped        Koreader files\nNo "
                                           u"highlights in        files\nConverted       "
-                                          u" files",
-                                          wx.DefaultPosition, wx.DefaultSize, 0)
+                                          u" files", wx.DefaultPosition, wx.DefaultSize,
+                                          0)
         self.results_text.Wrap(-1)
         sizer_4result_text.Add(self.results_text, 1,
                                wx.ALIGN_CENTER_VERTICAL | wx.ALL | wx.EXPAND, 5)
@@ -215,7 +215,7 @@ class BatchResults(wx.Dialog):
 
 
 ###########################################################################
-## Class About
+# Class About
 ###########################################################################
 
 class About(wx.Dialog):
@@ -236,7 +236,8 @@ class About(wx.Dialog):
 
         self.about_text = wx.html.HtmlWindow(self.info_panel, wx.ID_ANY,
                                              wx.DefaultPosition, wx.DefaultSize,
-                                             wx.html.HW_NO_SELECTION | wx.html.HW_SCROLLBAR_AUTO)
+                                             wx.html.HW_NO_SELECTION |
+                                             wx.html.HW_SCROLLBAR_AUTO)
         sizer_4info.Add(self.about_text, 1, wx.ALL | wx.EXPAND, 5)
 
         self.info_panel.SetSizer(sizer_4info)
