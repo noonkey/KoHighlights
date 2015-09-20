@@ -11,3 +11,7 @@
 * Save all the displayed Highlights as plain text
 * Batch convert all the files of a directory
 * Batch convert all the dropped files (if more than one)
+
+# Downloads
+
+Check the latest release on the [Downloads Page](https://github.com/noonkey/KoHighlights/releases)
