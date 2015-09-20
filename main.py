@@ -72,11 +72,13 @@ class KoHighlightsMainFrame(gui.MainFrame):
             if display_results:
                 self.text_field.WriteText(os.path.splitext(file_name_full)[0] + '\n\n')
         with codecs.open(filename, 'r', encoding='utf-8') as lua_file:
-            lua_text = lua_file.read().replace('\\', '')
-            highlight_text = re.compile(r'\["text"\] = "(.+?)"', re.DOTALL)
+            lua_text = lua_file.read().replace('\\\\', '\\').replace('\\\n', '\n')
+            lua_text = lua_text.replace('["text"] = "', '[^text^] = ^')
+            lua_text = lua_text.replace('"\n', '^\n')
+            highlight_text = re.compile(r'\[\^text\^\] = \^(.+?)\^', re.DOTALL)
             phrases = re.findall(highlight_text, lua_text)
-            bookmark_text = re.compile(r'\["text"\] = "(Page \d+? .+? @ \d+?-\d+?-\d+? '
-                                       r'\d+?:\d+?:\d+?)"', re.DOTALL)
+            bookmark_text = re.compile(r'\[\^text\^\] = \^(Page \d+? .+? @ \d+?-\d+?-'
+                                       r'\d+? \d+?:\d+?:\d+?)\^', re.DOTALL)
             bookmarks = re.findall(bookmark_text, lua_text)
             self.highlights = []
             for phrase in phrases:
