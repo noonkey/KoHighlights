@@ -8,5 +8,5 @@
 * Drag and drop a file to see the Highlights
 * Right-click to copy Highlights
 * Save all the displayed Highlights as plain text
-* Batch convert all the files to a directory
+* Batch convert all the files of a directory
 * Batch convert all the dropped files (if more than one)

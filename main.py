@@ -254,7 +254,7 @@ class About(gui.About):
           <li>Drag and drop a file to see the Highlights</li>
           <li>Right-click to copy Highlights</li>
           <li>Save all the displayed Highlights as plain text</li>
-          <li>Batch convert all the files to a directory</li>
+          <li>Batch convert all the files of a directory</li>
           <li>Batch convert all the dropped files (if more than one)</li>
         </ul>
         </body>
