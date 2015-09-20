@@ -10,7 +10,7 @@ import wx, wx.html
 import gui
 
 __author__ = 'noonkey'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 
 class DragAndDrop(wx.FileDropTarget):
@@ -221,26 +221,26 @@ class About(gui.About):
         icon = wx.Icon(path, wx.BITMAP_TYPE_PNG)
         self.SetIcon(icon)
 
-        about = """<html>
+        about = """
+        <html>
         <span class="style1"></span>
         <center>
           <table width="100%" height="100%" border="0">
-            <tr>
-              <td height="10%">&nbsp;</td>
-            </tr>
+
             <tr>
               <td height="128"><table width="100%" height="100" border="0">
                 <tr>
                   <td width="10%">&nbsp;</td>
                   <td width="128" height="128"><img src="stuff/logo.png" width="128" height="128"></td>
                   <td><p align="center"><b>KoHighlights</b> is a  utility for converting the Koreader's history files to simple text. </p>
-                  <p align="center">Version <b>{}</b></p></td>
+                  <p align="center">Version <b>{}</b></p>
+                  <p align="center"><a href="https://github.com/noonkey/KoHighlights">Visit  KoHighlights page.</a></p></td>
                   <td width="10%">&nbsp;</td>
                 </tr>
               </table></td>
             </tr>
             <tr>
-              <td height="10%">&nbsp;</td>
+              <td height="5%">&nbsp;</td>
             </tr>
           </table>
         </center>

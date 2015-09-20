@@ -220,8 +220,8 @@ class BatchResults(wx.Dialog):
 
 class About(wx.Dialog):
     def __init__(self, parent):
-        wx.Dialog.__init__(self, parent, id=wx.ID_ANY, title=u"About Konberter",
-                           pos=wx.DefaultPosition, size=wx.Size(400, 360),
+        wx.Dialog.__init__(self, parent, id=wx.ID_ANY, title=u"About KoHighlights",
+                           pos=wx.DefaultPosition, size=wx.Size(440, 360),
                            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
 
         self.SetSizeHintsSz(wx.DefaultSize, wx.DefaultSize)
@@ -236,16 +236,15 @@ class About(wx.Dialog):
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
         sizer_4info = wx.BoxSizer(wx.VERTICAL)
 
-        self.about_text = wx.html.HtmlWindow(self.info_panel, wx.ID_ANY,
-                                             wx.DefaultPosition, wx.DefaultSize,
-                                             wx.html.HW_NO_SELECTION |
-                                             wx.html.HW_SCROLLBAR_AUTO)
+        self.about_text = HtmlWindow(self.info_panel, wx.ID_ANY, wx.DefaultPosition,
+                                     wx.DefaultSize,
+                                     wx.html.HW_NO_SELECTION | wx.html.HW_SCROLLBAR_AUTO)
         sizer_4info.Add(self.about_text, 1, wx.ALL | wx.EXPAND, 5)
 
         self.info_panel.SetSizer(sizer_4info)
         self.info_panel.Layout()
         sizer_4info.Fit(self.info_panel)
-        self.about_notebook.AddPage(self.info_panel, u"About", False)
+        self.about_notebook.AddPage(self.info_panel, u"About", True)
         self.usage_panel = wx.Panel(self.about_notebook, wx.ID_ANY, wx.DefaultPosition,
                                     wx.DefaultSize, wx.TAB_TRAVERSAL)
         sizer_4usage = wx.BoxSizer(wx.VERTICAL)
@@ -282,3 +281,17 @@ class About(wx.Dialog):
 
     def __del__(self):
         pass
+
+
+class HtmlWindow(wx.html.HtmlWindow):
+    """ Use instead of wx.html.HtmlWindow for working html links
+    """
+    def __init__(self, parent, *args, **kwargs):
+        wx.html.HtmlWindow.__init__(self, parent, *args, **kwargs)
+
+    # noinspection PyMethodOverriding
+    def OnLinkClicked(self, link):
+        href = link.GetHref()
+        if href.startswith("http") or href.startswith("mailto:"):
+            import webbrowser
+            webbrowser.open(href)
