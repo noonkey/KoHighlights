@@ -221,7 +221,7 @@ class BatchResults(wx.Dialog):
 class About(wx.Dialog):
     def __init__(self, parent):
         wx.Dialog.__init__(self, parent, id=wx.ID_ANY, title=u"About Konberter",
-                           pos=wx.DefaultPosition, size=wx.Size(400, 320),
+                           pos=wx.DefaultPosition, size=wx.Size(400, 360),
                            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
 
         self.SetSizeHintsSz(wx.DefaultSize, wx.DefaultSize)
@@ -230,8 +230,10 @@ class About(wx.Dialog):
 
         sizer_4about = wx.BoxSizer(wx.VERTICAL)
 
-        self.info_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize,
-                                   wx.TAB_TRAVERSAL)
+        self.about_notebook = wx.Notebook(self, wx.ID_ANY, wx.DefaultPosition,
+                                          wx.DefaultSize, 0)
+        self.info_panel = wx.Panel(self.about_notebook, wx.ID_ANY, wx.DefaultPosition,
+                                   wx.DefaultSize, wx.TAB_TRAVERSAL)
         sizer_4info = wx.BoxSizer(wx.VERTICAL)
 
         self.about_text = wx.html.HtmlWindow(self.info_panel, wx.ID_ANY,
@@ -243,7 +245,23 @@ class About(wx.Dialog):
         self.info_panel.SetSizer(sizer_4info)
         self.info_panel.Layout()
         sizer_4info.Fit(self.info_panel)
-        sizer_4about.Add(self.info_panel, 1, wx.EXPAND | wx.ALL, 5)
+        self.about_notebook.AddPage(self.info_panel, u"About", False)
+        self.usage_panel = wx.Panel(self.about_notebook, wx.ID_ANY, wx.DefaultPosition,
+                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
+        sizer_4usage = wx.BoxSizer(wx.VERTICAL)
+
+        self.usage_text = wx.html.HtmlWindow(self.usage_panel, wx.ID_ANY,
+                                             wx.DefaultPosition, wx.DefaultSize,
+                                             wx.html.HW_NO_SELECTION |
+                                             wx.html.HW_SCROLLBAR_AUTO)
+        sizer_4usage.Add(self.usage_text, 1, wx.ALL | wx.EXPAND, 5)
+
+        self.usage_panel.SetSizer(sizer_4usage)
+        self.usage_panel.Layout()
+        sizer_4usage.Fit(self.usage_panel)
+        self.about_notebook.AddPage(self.usage_panel, u"Usage", False)
+
+        sizer_4about.Add(self.about_notebook, 1, wx.EXPAND | wx.ALL, 5)
 
         sizer_4about_btn = wx.BoxSizer(wx.HORIZONTAL)
 

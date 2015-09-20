@@ -247,6 +247,21 @@ class About(gui.About):
         """.format(__version__)
         self.about_text.SetPage(about)
 
+        usage = """<html>
+        <span class="style1"></span>
+        <ul>
+          <li>Open a file to see the Highlights</li>
+          <li>Drag and drop a file to see the Highlights</li>
+          <li>Right-click to copy Highlights</li>
+          <li>Save all the displayed Highlights as plain text</li>
+          <li>Batch convert all the files to a directory</li>
+          <li>Batch convert all the dropped files (if more than one)</li>
+        </ul>
+        </body>
+        </html>
+        """
+        self.usage_text.SetPage(usage)
+
 
 if __name__ == '__main__':
     app = wx.App(False)
