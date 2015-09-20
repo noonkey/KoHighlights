@@ -1,5 +1,6 @@
 # General
 ![kohighlights128w](https://cloud.githubusercontent.com/assets/14363074/9978678/22e01940-5f49-11e5-8112-bc58b8f0f56f.png)
+
 **KoHighlights** is a  utility for converting the [Koreader](https://github.com/koreader/koreader)'s history files to simple text.
 
 # Usage
