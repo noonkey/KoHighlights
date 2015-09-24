@@ -10,7 +10,7 @@ import wx, wx.html
 import gui
 
 __author__ = 'noonkey'
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 
 class DragAndDrop(wx.FileDropTarget):
@@ -127,7 +127,8 @@ class KoHighlightsMainFrame(gui.MainFrame):
         """ Chose directory to batch process.
         """
         source_dialog = wx.DirDialog(self, "Choose a directory with some Koreader "
-                                           "History files", style=wx.DD_DEFAULT_STYLE)
+                                           "History files",
+                                     style=wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
         if source_dialog.ShowModal() == wx.ID_OK:
             source_path = source_dialog.GetPath()
         else:
@@ -234,7 +235,7 @@ class About(gui.About):
                   <td width="128" height="128"><img src="stuff/logo.png" width="128" height="128"></td>
                   <td><p align="center"><b>KoHighlights</b> is a  utility for converting the Koreader's history files to simple text. </p>
                   <p align="center">Version <b>{}</b></p>
-                  <p align="center"><a href="https://github.com/noonkey/KoHighlights">Visit  KoHighlights page.</a></p></td>
+                  <p align="center"><a href="https://github.com/noonkey/KoHighlights">Visit  KoHighlights page</a></p></td>
                   <td width="10%">&nbsp;</td>
                 </tr>
               </table></td>
