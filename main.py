@@ -10,7 +10,7 @@ import wx, wx.html
 import gui
 
 __author__ = 'noonkey'
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 
 class DragAndDrop(wx.FileDropTarget):
@@ -104,7 +104,8 @@ class KoHighlightsMainFrame(gui.MainFrame):
         dialog.Destroy()
 
     def on_save_file(self, event):
-        """ Saves the current text as text file.
+        """ Opens a 'file selector' dialog to save
+        the current text as text file.
         """
         wildcard = 'text files (*.txt)|*.txt|All files (*.*)|*.*'
         dialog = wx.FileDialog(self, "Select filename for the text file",
@@ -124,7 +125,7 @@ class KoHighlightsMainFrame(gui.MainFrame):
 
     # noinspection PyUnboundLocalVariable
     def on_dir(self, event):
-        """ Chose directory to batch process.
+        """ Choose directory to batch process.
         """
         source_dialog = wx.DirDialog(self, "Choose a directory with some Koreader "
                                            "History files",
@@ -153,7 +154,7 @@ class KoHighlightsMainFrame(gui.MainFrame):
         self.about.ShowModal()
 
     def exit_app(self, event):
-        """ When the 'Exit' button is pressed.
+        """ When the 'Exit' menu entry is selected.
         """
         self.Close()
 
@@ -190,12 +191,14 @@ class BatchDialog(gui.BatchDialog):
                     frame.converted_files += 1
         self.Close()
         if dest:
-            text = 'Processed {} Koreader files\nNo highlights in {} files\n' \
+            text = 'Processed {} Koreader files\n' \
+                   'No highlights in {} files\n' \
                    'Converted {} files'.format(frame.dropped_files, (frame.dropped_files -
                                                frame.converted_files),
                                                frame.converted_files)
         else:
-            text = 'Dropped {} Koreader files\nNo highlights in {} files\n' \
+            text = 'Dropped {} Koreader files\n' \
+                   'No highlights in {} files\n' \
                    'Converted {} files'.format(frame.dropped_files, (frame.dropped_files -
                                                frame.converted_files),
                                                frame.converted_files)
@@ -213,6 +216,20 @@ class BatchResults(gui.BatchResults):
         self.SetIcon(icon)
 
 
+class HtmlWindow(wx.html.HtmlWindow):
+    """ Use instead of wx.html.HtmlWindow for working html links
+    """
+    def __init__(self, parent, *args, **kwargs):
+        wx.html.HtmlWindow.__init__(self, parent, *args, **kwargs)
+
+    # noinspection PyMethodOverriding
+    def OnLinkClicked(self, link):
+        href = link.GetHref()
+        if href.startswith("http") or href.startswith("mailto:"):
+            import webbrowser
+            webbrowser.open(href)
+
+
 class About(gui.About):
     """ The About window.
     """
@@ -221,6 +238,15 @@ class About(gui.About):
         path = os.path.abspath("./stuff/icon.png")
         icon = wx.Icon(path, wx.BITMAP_TYPE_PNG)
         self.SetIcon(icon)
+        self.sizer_4info = self.info_panel.GetSizer()
+        self.about_text = HtmlWindow(self.info_panel, wx.ID_ANY, wx.DefaultPosition,
+                                     wx.DefaultSize,
+                                     wx.html.HW_NO_SELECTION | wx.html.HW_SCROLLBAR_AUTO)
+        self.sizer_4info.Add(self.about_text, 1, wx.ALL | wx.EXPAND, 5)
+
+        self.info_panel.SetSizer(self.sizer_4info)
+        self.info_panel.Layout()
+        self.sizer_4info.Fit(self.info_panel)
 
         about = """
         <html>

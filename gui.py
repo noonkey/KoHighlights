@@ -236,9 +236,12 @@ class About(wx.Dialog):
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
         sizer_4info = wx.BoxSizer(wx.VERTICAL)
 
-        self.about_text = HtmlWindow(self.info_panel, wx.ID_ANY, wx.DefaultPosition,
-                                     wx.DefaultSize,
-                                     wx.html.HW_NO_SELECTION | wx.html.HW_SCROLLBAR_AUTO)
+        self.about_text = wx.html.HtmlWindow(self.info_panel, wx.ID_ANY,
+                                             wx.DefaultPosition, wx.DefaultSize,
+                                             wx.html.HW_NO_SELECTION | 
+                                             wx.html.HW_SCROLLBAR_AUTO)
+        self.about_text.Hide()
+
         sizer_4info.Add(self.about_text, 1, wx.ALL | wx.EXPAND, 5)
 
         self.info_panel.SetSizer(sizer_4info)
@@ -281,17 +284,3 @@ class About(wx.Dialog):
 
     def __del__(self):
         pass
-
-
-class HtmlWindow(wx.html.HtmlWindow):
-    """ Use instead of wx.html.HtmlWindow for working html links
-    """
-    def __init__(self, parent, *args, **kwargs):
-        wx.html.HtmlWindow.__init__(self, parent, *args, **kwargs)
-
-    # noinspection PyMethodOverriding
-    def OnLinkClicked(self, link):
-        href = link.GetHref()
-        if href.startswith("http") or href.startswith("mailto:"):
-            import webbrowser
-            webbrowser.open(href)
