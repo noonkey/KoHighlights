@@ -6,11 +6,13 @@ from __future__ import unicode_literals
 import codecs
 import os
 import re
+import traceback
+import time
 import wx, wx.html
 import gui
 
 __author__ = 'noonkey'
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 
 
 class DragAndDrop(wx.FileDropTarget):
@@ -259,7 +261,7 @@ class About(gui.About):
                 <tr>
                   <td width="10%">&nbsp;</td>
                   <td width="128" height="128"><img src="stuff/logo.png" width="128" height="128"></td>
-                  <td><p align="center"><b>KoHighlights</b> is a  utility for converting the Koreader's history files to simple text. </p>
+                  <td><p align="center"><b>KoHighlights</b> is an utility for converting the Koreader's history files to simple text. </p>
                   <p align="center">Version <b>{}</b></p>
                   <p align="center"><a href="https://github.com/noonkey/KoHighlights">Visit  KoHighlights page</a></p></td>
                   <td width="10%">&nbsp;</td>
@@ -292,8 +294,18 @@ class About(gui.About):
         self.usage_text.SetPage(usage)
 
 
+def error_print():
+    with open("err_log.txt", "a") as log:
+        log.write('\nCrash@{}\n'.format(time.strftime("%Y-%m-%d %H:%M:%S")))
+    traceback.print_exc(file=open("err_log.txt", "a"))
+    traceback.print_exc()
+
+
 if __name__ == '__main__':
-    app = wx.App(False)
-    frame = KoHighlightsMainFrame(None)
-    frame.Show(True)
-    app.MainLoop()
+    try:
+        app = wx.App(False)
+        frame = KoHighlightsMainFrame(None)
+        frame.Show(True)
+        app.MainLoop()
+    except:
+        error_print()
