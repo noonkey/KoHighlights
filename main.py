@@ -12,7 +12,7 @@ import wx, wx.html
 import gui
 
 __author__ = 'noonkey'
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 
 
 class DragAndDrop(wx.FileDropTarget):
@@ -255,16 +255,14 @@ class About(gui.About):
         <span class="style1"></span>
         <center>
           <table width="100%" height="100%" border="0">
-
             <tr>
               <td height="128"><table width="100%" height="100" border="0">
                 <tr>
-                  <td width="10%">&nbsp;</td>
-                  <td width="128" height="128"><img src="stuff/logo.png" width="128" height="128"></td>
+                  <td height="128"><img src="stuff/logo.png" width="128" height="128"></td>
                   <td><p align="center"><b>KoHighlights</b> is an utility for converting the Koreader's history files to simple text. </p>
                   <p align="center">Version <b>{}</b></p>
-                  <p align="center"><a href="https://github.com/noonkey/KoHighlights">Visit  KoHighlights page</a></p></td>
-                  <td width="10%">&nbsp;</td>
+                  <p align="center"><a href="https://github.com/noonkey/KoHighlights">Visit  KoHighlights page</a></p>
+				  <p align="center"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RBYLVRYG9RU2S"><img src="stuff/paypal.png" alt="PayPal Button" width="142" height="27" border="0"></a></p></td>
                 </tr>
               </table></td>
             </tr>

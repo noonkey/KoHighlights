@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*- 
 
 ###########################################################################
-# Python code generated with wxFormBuilder (version Jun 17 2015)
-# http://www.wxformbuilder.org/
-#
-# PLEASE DO "NOT" EDIT THIS FILE!
+## Python code generated with wxFormBuilder (version Jun 17 2015)
+## http://www.wxformbuilder.org/
+##
+## PLEASE DO "NOT" EDIT THIS FILE!
 ###########################################################################
 
 import wx
@@ -13,7 +13,7 @@ import wx.html
 
 
 ###########################################################################
-# Class MainFrame
+## Class MainFrame
 ###########################################################################
 
 class MainFrame(wx.Frame):
@@ -96,7 +96,7 @@ class MainFrame(wx.Frame):
 
 
 ###########################################################################
-# Class BatchDialog
+## Class BatchDialog
 ###########################################################################
 
 class BatchDialog(wx.Dialog):
@@ -161,7 +161,7 @@ class BatchDialog(wx.Dialog):
 
 
 ###########################################################################
-# Class BatchResults
+## Class BatchResults
 ###########################################################################
 
 class BatchResults(wx.Dialog):
@@ -215,13 +215,13 @@ class BatchResults(wx.Dialog):
 
 
 ###########################################################################
-# Class About
+## Class About
 ###########################################################################
 
 class About(wx.Dialog):
     def __init__(self, parent):
         wx.Dialog.__init__(self, parent, id=wx.ID_ANY, title=u"About KoHighlights",
-                           pos=wx.DefaultPosition, size=wx.Size(440, 360),
+                           pos=wx.DefaultPosition, size=wx.Size(440, 380),
                            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
 
         self.SetSizeHintsSz(wx.DefaultSize, wx.DefaultSize)
@@ -238,7 +238,7 @@ class About(wx.Dialog):
 
         self.about_text = wx.html.HtmlWindow(self.info_panel, wx.ID_ANY,
                                              wx.DefaultPosition, wx.DefaultSize,
-                                             wx.html.HW_NO_SELECTION | 
+                                             wx.html.HW_NO_SELECTION |
                                              wx.html.HW_SCROLLBAR_AUTO)
         self.about_text.Hide()
 
