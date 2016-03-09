@@ -8,11 +8,12 @@ import os
 import re
 import traceback
 import time
+import sys
 import wx, wx.html
 import gui
 
 __author__ = 'noonkey'
-__version__ = '0.1.5'
+__version__ = '0.1.6.0'
 
 
 class DragAndDrop(wx.FileDropTarget):
@@ -26,6 +27,15 @@ class DragAndDrop(wx.FileDropTarget):
         if len(filenames) == 1:
             if os.path.isfile(filenames[0]):
                 frame.get_highlights(filenames[0])
+            elif os.path.isdir(filenames[0]):
+                self.dropped_files_list = []
+                for current_path, _, files in os.walk(filenames[0]):
+                    for filename in files:
+                        if os.path.splitext(filename)[1] == '.lua':
+                            self.dropped_files_list.append(
+                                    os.path.join(current_path, filename))
+                frame.dropped_files = len(self.dropped_files_list)
+                frame.batch_dialog.ShowModal()
         else:
             self.dropped_files_list = []
             for filename in filenames:
@@ -302,6 +312,8 @@ def error_print():
 if __name__ == '__main__':
     try:
         app = wx.App(False)
+        # Change the current working directory to the directory of the module
+        os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
         frame = KoHighlightsMainFrame(None)
         frame.Show(True)
         app.MainLoop()
