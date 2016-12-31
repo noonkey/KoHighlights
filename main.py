@@ -12,8 +12,8 @@ import sys
 import wx, wx.html
 import gui
 
-__author__ = 'noonkey'
-__version__ = '0.1.6.0'
+__author__ = 'noEmbryo'
+__version__ = '0.1.7.0'
 
 
 class DragAndDrop(wx.FileDropTarget):
@@ -66,22 +66,23 @@ class KoHighlightsMainFrame(gui.MainFrame):
         """
         try:
             if sys.argv[1]:
+                files_list = self.drop.dropped_files_list
                 if len(sys.argv) == 2:
                     if os.path.isdir(sys.argv[1]):
                         for current_path, _, files in os.walk(sys.argv[1]):
                             for filename in files:
                                 if os.path.splitext(filename)[1] == '.lua':
-                                    self.drop.dropped_files_list.append(
-                                                    os.path.join(current_path, filename))
-                        frame.dropped_files = len(self.drop.dropped_files_list)
-                        frame.batch_dialog.ShowModal()
+                                    files_list.append(os.path.join(current_path,
+                                                                   filename))
+                        self.dropped_files = len(files_list)
+                        self.batch_dialog.ShowModal()
                     else:
-                        frame.get_highlights(sys.argv[1])
+                        self.get_highlights(sys.argv[1])
                 else:
                     for filename in sys.argv[1:]:
                         if os.path.splitext(filename)[1] == '.lua':
-                                self.drop.dropped_files_list.append(filename)
-                    self.dropped_files = len(self.drop.dropped_files_list)
+                                files_list.append(filename)
+                    self.dropped_files = len(files_list)
                     self.batch_dialog.ShowModal()
         except IndexError:
             pass
@@ -209,6 +210,9 @@ class BatchDialog(gui.BatchDialog):
         """ Process many dropped files.
         """
         frame.converted_files = 0
+        converted = frame.converted_files
+        dropped = frame.dropped_files
+
         for filename in frame.drop.dropped_files_list:
             file_dir, file_name_full = os.path.split(filename)
             try:
@@ -225,20 +229,10 @@ class BatchDialog(gui.BatchDialog):
                 with codecs.open(file_name, 'w+', encoding='utf-8') as text_file:
                     for highlight in frame.highlights:
                         text_file.write(highlight + '\n\n')
-                    frame.converted_files += 1
+                    converted += 1
         self.Close()
-        if dest:
-            text = 'Processed {} Koreader files\n' \
-                   'No highlights in {} files\n' \
-                   'Converted {} files'.format(frame.dropped_files, (frame.dropped_files -
-                                               frame.converted_files),
-                                               frame.converted_files)
-        else:
-            text = 'Dropped {} Koreader files\n' \
-                   'No highlights in {} files\n' \
-                   'Converted {} files'.format(frame.dropped_files, (frame.dropped_files -
-                                               frame.converted_files),
-                                               frame.converted_files)
+        text = 'Checked {} Koreader files\nNo highlights in {} files\n' \
+               'Converted {} files'.format(dropped, (dropped - converted), converted)
         frame.batch_results.results_text.SetLabelText(text)
         frame.batch_results.Show()
 
@@ -296,7 +290,7 @@ class About(gui.About):
                   <td height="128"><img src="stuff/logo.png" width="128" height="128"></td>
                   <td><p align="center"><b>KoHighlights</b> is an utility for converting the Koreader's history files to simple text. </p>
                   <p align="center">Version <b>{}</b></p>
-                  <p align="center"><a href="https://github.com/noonkey/KoHighlights">Visit  KoHighlights page</a></p>
+                  <p align="center"><a href="https://github.com/noEmbryo/KoHighlights">Visit  KoHighlights page</a></p>
 				  <p align="center"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RBYLVRYG9RU2S"><img src="stuff/paypal.png" alt="PayPal Button" width="142" height="27" border="0"></a></p></td>
                 </tr>
               </table></td>
