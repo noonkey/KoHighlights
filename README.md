@@ -7,7 +7,7 @@
 **There is an [updated totally re-written version](https://github.com/noembryo/KoHighlights) (using the Qt framework [PySide]).  
 This version (which uses the wxPython) is considered deprecated.**
 
-# Usage 
+# Usage
 
 * Open a file to see the Highlights
 * Drag and drop a file to see the Highlights
